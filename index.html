@@ -80,14 +80,6 @@
   <body
     class="gradient-bg min-h-screen font-sans antialiased transition-colors duration-500 p-4 md:p-8"
   >
-    <button
-      id="theme-toggle"
-      class="fixed top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-lg z-10 hover:shadow-xl transition duration-300"
-    >
-      <i class="fas fa-sun dark:hidden"></i>
-      <i class="fas fa-moon hidden dark:inline"></i>
-    </button>
-
     <div
       class="max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-2xl rounded-xl p-6 md:p-10 transition-colors duration-500"
     >
@@ -141,7 +133,7 @@
           <h2
             class="text-xl font-semibold text-secondary-navy dark:text-sky-300 mb-4 border-b dark:border-gray-700 pb-2"
           >
-            1. Detail Pemesanan
+            1. Tanggal
           </h2>
           <div class="input-container">
             <input
@@ -164,7 +156,34 @@
           <h2
             class="text-xl font-semibold text-secondary-navy dark:text-sky-300 mb-4 border-b dark:border-gray-700 pb-2"
           >
-            2. Data Customer
+            2. Jenis Booking
+          </h2>
+          <div class="input-container">
+            <select
+              class="form-input w-full p-3 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue transition duration-150"
+              name="JenisBooking"
+              id=""
+              required
+              plaseholder=" "
+            >
+              <option value=" "></option>
+              <option value="Booking.com">Booking.Com</option>
+              <option value="WhatApp">WhatApp</option>
+              <option value="On The Spot">On The Spot</option>
+            </select>
+            <label
+              for="booking-date"
+              class="floating-label text-gray-500 dark:text-gray-400"
+              >Pilih Metode Booking</label
+            >
+          </div>
+        </div>
+
+        <div>
+          <h2
+            class="text-xl font-semibold text-secondary-navy dark:text-sky-300 mb-4 border-b dark:border-gray-700 pb-2"
+          >
+            3. Data Customer
           </h2>
           <div class="input-container group">
             <input
@@ -192,7 +211,7 @@
           <h2
             class="text-xl font-semibold text-secondary-navy dark:text-sky-300 mb-4 border-b dark:border-gray-700 pb-2"
           >
-            3 & 4. Periode Menginap
+            4. Periode Menginap
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="input-container">
@@ -227,6 +246,61 @@
               >
             </div>
           </div>
+
+          <div>
+            <h2
+              class="mt-6 text-xl font-semibold text-secondary-navy dark:text-sky-300 mb-4 border-b dark:border-gray-700 pb-2"
+            >
+              5. Payment
+            </h2>
+            <div class="input-container">
+              <!-- <input
+                type="date"
+                name="DateBooking"
+                id="booking-date"
+                required
+                placeholder=" "
+                class="form-input w-full p-3 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue transition duration-150"
+              /> -->
+              <select
+                class="form-input w-full p-3 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue transition duration-150"
+                type="text"
+                name="Payment"
+                id=""
+              >
+                <option value=" "></option>
+                <option value="Tunai">Tunai</option>
+                <option value="Non Tunai">Non Tunai</option>
+              </select>
+              <label
+                for="booking-date"
+                class="floating-label text-gray-500 dark:text-gray-400"
+                >Tanggal Pemesanan</label
+              >
+            </div>
+          </div>
+          <div>
+            <h2
+              class="mt-6 text-xl font-semibold text-secondary-navy dark:text-sky-300 mb-4 border-b dark:border-gray-700 pb-2"
+            >
+              6. Uang Muka
+            </h2>
+            <div class="input-container group">
+              <input
+                type="number"
+                name="UangMuka"
+                id="customer-name"
+                required
+                placeholder=" "
+                class="form-input w-full p-3 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue transition duration-150"
+              />
+              <label
+                for="customer-name"
+                class="floating-label text-gray-500 dark:text-gray-400"
+                >Rp.</label
+              >
+            </div>
+          </div>
         </div>
 
         <div class="pt-6 flex justify-center border-t dark:border-gray-700">
@@ -245,55 +319,6 @@
         ></div>
       </form>
     </div>
-
-    <script>
-      // 1. Dark Mode Toggle
-      const themeToggle = document.getElementById("theme-toggle");
-      themeToggle.addEventListener("click", function () {
-        document.documentElement.classList.toggle("dark");
-      });
-
-      // 2. Simulasi Validasi (Poin 30 - Tidak ada error)
-      // const form = document.querySelector("form");
-      const statusMessage = document.getElementById("status-message");
-
-      // form.addEventListener("submit", (e) {
-      //   e.preventDefault();
-
-      //   // Logika sederhana bahwa semua field terisi (required)
-      //   const allFilled = Array.from(form.querySelectorAll("[required]")).every(
-      //     (input) => input.value.trim() !== ""
-      //   );
-
-      //   if (allFilled) {
-      //     // Simulasi Sukses (Warna Biru/Hijau)
-      //     statusMessage.classList.remove(
-      //       "hidden",
-      //       "bg-accent-red/20",
-      //       "text-accent-red"
-      //     );
-      //     statusMessage.classList.add(
-      //       "bg-primary-blue/20",
-      //       "text-primary-blue"
-      //     );
-      //     statusMessage.innerHTML =
-      //       "Booking Anda berhasil dikonfirmasi! Kami akan segera menghubungi Anda.";
-
-      //     // Reset form setelah sukses
-      //     form.reset();
-      //   } else {
-      //     // Simulasi Error (Meskipun Anda tidak menginginkan error, ini penting untuk UX)
-      //     statusMessage.classList.remove(
-      //       "hidden",
-      //       "bg-primary-blue/20",
-      //       "text-primary-blue"
-      //     );
-      //     statusMessage.classList.add("bg-accent-red/20", "text-accent-red");
-      //     statusMessage.innerHTML =
-      //       "⚠️ Mohon lengkapi semua bidang yang wajib diisi sebelum melanjutkan.";
-      //   }
-      // });
-    </script>
 
     <script>
       const scriptURL =
