@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Kamar - Hotel [Nama Anda]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class", // Menggunakan class "dark" pada tag html
+        theme: {
+          extend: {
+            colors: {
+              "primary-blue": "#3B82F6", // Biru Utama
+              "accent-red": "#EF4444", // Merah Aksen
+              "secondary-navy": "#1E3A8A", // Biru Navy Sekunder
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* CSS Tambahan untuk Floating Label dan Tooltip */
+      .input-container {
+        position: relative;
+      }
+      .floating-label {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+        transition: all 0.2s ease-out;
+        pointer-events: none;
+      }
+      .form-input:focus + .floating-label,
+      .form-input:not(:placeholder-shown) + .floating-label {
+        top: 0.25rem;
+        font-size: 0.75rem; /* text-xs */
+        padding: 0 0.25rem;
+        background-color: white; /* Latar belakang untuk Dark Mode */
+        border-radius: 0.25rem;
+      }
+
+      /* Penyesuaian Dark Mode untuk Floating Label */
+      .dark .form-input:focus + .floating-label,
+      .dark .form-input:not(:placeholder-shown) + .floating-label {
+        background-color: #1f2937; /* bg-gray-800 */
+      }
+
+      /* Gradient Background */
+      .gradient-bg {
+        background-image: linear-gradient(
+          to bottom,
+          #dbeafe 0%,
+          #ffffff 100%
+        ); /* Biru Muda-Putih */
+      }
+      .dark .gradient-bg {
+        background-image: linear-gradient(
+          to bottom,
+          #1e3a8a 0%,
+          #111827 100%
+        ); /* Navy-Dark */
+      }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body
+    class="gradient-bg min-h-screen font-sans antialiased transition-colors duration-500 p-4 md:p-8"
+  >
+    <button
+      id="theme-toggle"
+      class="fixed top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-lg z-10 hover:shadow-xl transition duration-300"
+    >
+      <i class="fas fa-sun dark:hidden"></i>
+      <i class="fas fa-moon hidden dark:inline"></i>
+    </button>
+
+    <div
+      class="max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-2xl rounded-xl p-6 md:p-10 transition-colors duration-500"
+    >
+      <header class="mb-8 text-center border-b dark:border-gray-700 pb-4">
+        <div
+          class="text-3xl font-extrabold text-primary-blue dark:text-sky-400 mb-2"
+        >
+          <i class="fas fa-hotel mr-2"></i> Home Stay
+        </div>
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+          Form Pemesanan Kamar
+        </h1>
+        <p class="text-gray-500 dark:text-gray-400 mt-1">
+          Pastikan semua data terisi dengan benar.
+        </p>
+        <!-- Jika penyimpanan berhasil -->
+        <div
+          class="alert alert-success alert-dismissible fade show d-none myAlertsuccess"
+          role="alert"
+        >
+          <strong>BERHASIL!!</strong> Pemesanan Berhasil Disimpan!!.
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        <!-- Jika penyimpanan gagal -->
+        <div
+          class="alert alert-danger alert-dismissible fade show myAlertfailed d-none"
+          role="alert"
+        >
+          <strong>GAGAL!!</strong> Pemesanan Gagal Disimpan!!.
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+      </header>
+
+      <form
+        name="submit-to-google-DataBase"
+        action="#"
+        method="POST"
+        class="space-y-8"
+      >
+        <div>
+          <h2
+            class="text-xl font-semibold text-secondary-navy dark:text-sky-300 mb-4 border-b dark:border-gray-700 pb-2"
+          >
+            1. Detail Pemesanan
+          </h2>
+          <div class="input-container">
+            <input
+              type="date"
+              name="DateBooking"
+              id="booking-date"
+              required
+              placeholder=" "
+              class="form-input w-full p-3 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue transition duration-150"
+            />
+            <label
+              for="booking-date"
+              class="floating-label text-gray-500 dark:text-gray-400"
+              >Tanggal Pemesanan</label
+            >
+          </div>
+        </div>
+
+        <div>
+          <h2
+            class="text-xl font-semibold text-secondary-navy dark:text-sky-300 mb-4 border-b dark:border-gray-700 pb-2"
+          >
+            2. Data Customer
+          </h2>
+          <div class="input-container group">
+            <input
+              type="text"
+              name="NamaCustomer"
+              id="customer-name"
+              required
+              placeholder=" "
+              class="form-input w-full p-3 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue transition duration-150"
+            />
+            <label
+              for="customer-name"
+              class="floating-label text-gray-500 dark:text-gray-400"
+              >Nama Customer Lengkap</label
+            >
+            <p
+              class="text-xs text-gray-400 dark:text-gray-500 mt-1 ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            >
+              *Nama harus sesuai dengan kartu identitas.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h2
+            class="text-xl font-semibold text-secondary-navy dark:text-sky-300 mb-4 border-b dark:border-gray-700 pb-2"
+          >
+            3 & 4. Periode Menginap
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="input-container">
+              <input
+                type="date"
+                name="DateCheckIn"
+                id="check-in-date"
+                required
+                placeholder=" "
+                class="form-input w-full p-3 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue transition duration-150"
+              />
+              <label
+                for="check-in-date"
+                class="floating-label text-gray-500 dark:text-gray-400"
+                >Tanggal Check-in</label
+              >
+            </div>
+
+            <div class="input-container">
+              <input
+                type="date"
+                name="DateCheckout"
+                id="check-out-date"
+                required
+                placeholder=" "
+                class="form-input w-full p-3 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue transition duration-150"
+              />
+              <label
+                for="check-out-date"
+                class="floating-label text-gray-500 dark:text-gray-400"
+                >Tanggal Check-out</label
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-6 flex justify-center border-t dark:border-gray-700">
+          <button
+            type="submit"
+            class="w-full md:w-3/4 px-8 py-3 text-lg font-bold text-white bg-primary-blue rounded-lg shadow-xl hover:bg-secondary-navy focus:outline-none focus:ring-4 focus:ring-primary-blue/50 transition duration-300"
+          >
+            <i class="fas fa-calendar-check mr-2"></i> Konfirmasi Booking
+          </button>
+        </div>
+
+        <div
+          id="status-message"
+          class="hidden p-4 mt-4 text-center text-sm font-semibold rounded-lg"
+          role="alert"
+        ></div>
+      </form>
+    </div>
+
+    <script>
+      // 1. Dark Mode Toggle
+      const themeToggle = document.getElementById("theme-toggle");
+      themeToggle.addEventListener("click", function () {
+        document.documentElement.classList.toggle("dark");
+      });
+
+      // 2. Simulasi Validasi (Poin 30 - Tidak ada error)
+      // const form = document.querySelector("form");
+      const statusMessage = document.getElementById("status-message");
+
+      // form.addEventListener("submit", (e) {
+      //   e.preventDefault();
+
+      //   // Logika sederhana bahwa semua field terisi (required)
+      //   const allFilled = Array.from(form.querySelectorAll("[required]")).every(
+      //     (input) => input.value.trim() !== ""
+      //   );
+
+      //   if (allFilled) {
+      //     // Simulasi Sukses (Warna Biru/Hijau)
+      //     statusMessage.classList.remove(
+      //       "hidden",
+      //       "bg-accent-red/20",
+      //       "text-accent-red"
+      //     );
+      //     statusMessage.classList.add(
+      //       "bg-primary-blue/20",
+      //       "text-primary-blue"
+      //     );
+      //     statusMessage.innerHTML =
+      //       "Booking Anda berhasil dikonfirmasi! Kami akan segera menghubungi Anda.";
+
+      //     // Reset form setelah sukses
+      //     form.reset();
+      //   } else {
+      //     // Simulasi Error (Meskipun Anda tidak menginginkan error, ini penting untuk UX)
+      //     statusMessage.classList.remove(
+      //       "hidden",
+      //       "bg-primary-blue/20",
+      //       "text-primary-blue"
+      //     );
+      //     statusMessage.classList.add("bg-accent-red/20", "text-accent-red");
+      //     statusMessage.innerHTML =
+      //       "⚠️ Mohon lengkapi semua bidang yang wajib diisi sebelum melanjutkan.";
+      //   }
+      // });
+    </script>
+
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbyMLEBP2SitkQ82Lr8sd5yFLWWHUstrQs3NZKXoOXjtXPMvvf20YBI_f7SmgaNbidYQYg/exec";
+      const form = document.forms["submit-to-google-DataBase"];
+      const myAlertsuccess = document.querySelector(".myAlertsuccess");
+      const myAlertfailed = document.querySelector(".myAlertfailed");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            console.log("Success!", response);
+            myAlertsuccess.classList.toggle("d-none");
+          })
+
+          .catch((error) => {
+            console.error("Error!", error.message);
+            myAlertfailed.classList.toggle("d-none");
+          });
+      });
+    </script>
+  </body>
+</html>
